@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chaitanya Varma Chekuri</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #1a1a1a;
+      --color-muted: #555;
+      --color-accent: #0a66c2;
+      --color-border: #e0e0e0;
+      --color-section-bg: #f8f9fa;
+      --color-card-bg: #ffffff;
+      --max-width: 800px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+    }
+
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #fff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .header p.subtitle { font-size: 1rem; color: #ccc; margin-bottom: 1rem; }
+    .header .contact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+    }
+    .header .contact span,
+    .header .contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .header .contact a { color: #8cb4e0; }
+    .header .contact a:hover { color: #fff; transform: translateY(-1px); text-decoration: none; }
+    .btn-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+      padding: 0.6rem 1.5rem;
+      background: var(--color-accent);
+      color: #fff !important;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-resume:hover {
+      background: #084e96;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.4);
+    }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--color-border);
+      z-index: 10;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0.75rem 1rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    nav a i[data-lucide] { width: 16px; height: 16px; }
+    nav a:hover { color: var(--color-accent); text-decoration: none; }
+    nav a.active {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+    }
+
+    /* Sections */
+    section { max-width: var(--max-width); margin: 0 auto; padding: 2.5rem 1.5rem; }
+    section:nth-child(odd) { background: var(--color-section-bg); }
+    section:nth-child(even) { background: var(--color-bg); }
+    section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    section h2 i[data-lucide] { color: var(--color-accent); }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* About */
+    .about p { color: var(--color-muted); font-size: 1rem; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .skill-category {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .skill-category:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    .skill-category h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .skill-category h3 i[data-lucide] { width: 16px; height: 16px; }
+    .skill-category .skill-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .skill-category .skill-tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a5fa3;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    /* Experience */
+    .job {
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--color-accent);
+      transition: border-color 0.2s;
+    }
+    .job:hover { border-left-color: #084e96; }
+    .job:last-child { margin-bottom: 0; }
+    .job-header { margin-bottom: 0.75rem; }
+    .job-header h3 { font-size: 1.1rem; font-weight: 700; }
+    .job-header .company { color: var(--color-accent); }
+    .job-header .meta { font-size: 0.85rem; color: var(--color-muted); margin-top: 0.15rem; }
+    .job ul { list-style: disc; padding-left: 1.25rem; }
+    .job li { color: var(--color-muted); font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .job li.hidden-bullet { display: none; }
+    .job .toggle-bullets {
+      background: none;
+      border: none;
+      color: var(--color-accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.25rem 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.25rem;
+      transition: color 0.2s;
+    }
+    .job .toggle-bullets:hover { color: #084e96; }
+    .job .toggle-bullets i[data-lucide] { width: 14px; height: 14px; }
+
+    /* Education */
+    .edu {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .edu h3 { font-size: 1.1rem; font-weight: 700; }
+    .edu .meta { font-size: 0.85rem; color: var(--color-muted); margin-top: 0.15rem; }
+    .edu .field { color: var(--color-muted); font-size: 0.95rem; margin-top: 0.25rem; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* Responsive */
+    @media (min-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      nav ul { gap: 1rem; }
+      nav a { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>Chaitanya Varma Chekuri</h1>
+    <p class="subtitle">Software Development Engineer II at Amazon | Generative AI Systems &amp; Full-Stack Architecture</p>
+    <div class="contact">
+      <span><i data-lucide="map-pin" style="width:14px;height:14px;"></i> San Jose, California</span>
+      <a href="tel:+17543023373"><i data-lucide="phone" style="width:14px;height:14px;"></i> +1 (754) 302-3373</a>
+      <a href="mailto:chaitanyavarmachekuri@gmail.com"><i data-lucide="mail" style="width:14px;height:14px;"></i> chaitanyavarmachekuri@gmail.com</a>
+      <a href="https://linkedin.com/in/chaitanyavarmachekuri" target="_blank" rel="noopener"><i data-lucide="linkedin" style="width:14px;height:14px;"></i> LinkedIn</a>
+    </div>
+    <a href="Chaitanya_Varma_Chekuri_GenAI_Full-Stack_SDE_II_at_Amazon.pdf" download class="btn-resume">
+      <i data-lucide="download" style="width:16px;height:16px;"></i> Download Resume
+    </a>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#about"><i data-lucide="user"></i> About</a></li>
+      <li><a href="#skills"><i data-lucide="wrench"></i> Skills</a></li>
+      <li><a href="#experience"><i data-lucide="briefcase"></i> Experience</a></li>
+      <li><a href="#education"><i data-lucide="graduation-cap"></i> Education</a></li>
+    </ul>
+  </nav>
+
+  <section id="about">
+    <h2 class="fade-in"><i data-lucide="user" style="width:22px;height:22px;"></i> About</h2>
+    <p class="about fade-in">
+      Senior Software Engineer specializing in production generative AI systems with 13+ years of full-stack expertise at Amazon, Best Buy, Thomson Reuters, and Citi. Built multi-agent chatbot platform using AWS Bedrock achieving 60% autonomous resolution rate and serving 300M+ monthly requests. Expert in LLM orchestration, prompt engineering, and Model Context Protocol servers for agentic workflows. Delivered AI-powered debugging assistant reducing incident resolution from 8 hours to 2 hours. Track record of scaling high-throughput microservices (2M+ daily requests) and mentoring teams on AI integration patterns.
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2 class="fade-in"><i data-lucide="wrench" style="width:22px;height:22px;"></i> Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category fade-in">
+        <h3><i data-lucide="brain"></i> AI/ML Integration</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS Bedrock</span><span class="skill-tag">Claude</span><span class="skill-tag">Nova</span><span class="skill-tag">Prompt Engineering</span><span class="skill-tag">LLM Integration</span><span class="skill-tag">Multi-Agent Systems</span><span class="skill-tag">MCP Servers</span>
+        </div>
+      </div>
+      <div class="skill-category fade-in">
+        <h3><i data-lucide="cloud"></i> Cloud &amp; Infrastructure</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS Lambda</span><span class="skill-tag">EC2</span><span class="skill-tag">S3</span><span class="skill-tag">Bedrock</span><span class="skill-tag">DynamoDB</span><span class="skill-tag">CloudWatch</span><span class="skill-tag">CloudFormation</span><span class="skill-tag">API Gateway</span><span class="skill-tag">SNS</span><span class="skill-tag">Kinesis</span><span class="skill-tag">Event-Driven Design</span><span class="skill-tag">Microservices</span><span class="skill-tag">IaC</span>
+        </div>
+      </div>
+      <div class="skill-category fade-in">
+        <h3><i data-lucide="code"></i> Languages &amp; Frameworks</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Python</span><span class="skill-tag">Node.js</span><span class="skill-tag">React</span><span class="skill-tag">Angular</span><span class="skill-tag">Spring Boot</span><span class="skill-tag">REST</span><span class="skill-tag">GraphQL</span><span class="skill-tag">Cypress</span>
+        </div>
+      </div>
+      <div class="skill-category fade-in">
+        <h3><i data-lucide="database"></i> Data &amp; Databases</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">DynamoDB</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Oracle</span><span class="skill-tag">Data Migration at Scale</span>
+        </div>
+      </div>
+      <div class="skill-category fade-in">
+        <h3><i data-lucide="git-branch"></i> DevOps &amp; Monitoring</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">CI/CD</span><span class="skill-tag">Pipelines</span><span class="skill-tag">Git</span><span class="skill-tag">OAuth 2.0</span><span class="skill-tag">Spring Cloud</span>
+        </div>
+      </div>
+      <div class="skill-category fade-in">
+        <h3><i data-lucide="users"></i> Methodologies</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Agile/Scrum</span><span class="skill-tag">System Design</span><span class="skill-tag">API Design</span><span class="skill-tag">Mentorship</span><span class="skill-tag">Cross-functional Leadership</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="fade-in"><i data-lucide="briefcase" style="width:22px;height:22px;"></i> Experience</h2>
+
+    <div class="job fade-in">
+      <div class="job-header">
+        <h3>Software Development Engineer II &mdash; <span class="company">Amazon</span></h3>
+        <div class="meta">Sunnyvale &nbsp;|&nbsp; August 2019 &mdash; Present</div>
+      </div>
+      <ul>
+        <li>Led development of AI-powered customer support platform serving 2K+ monthly users, reducing support ticket volume by 80% and improving customer satisfaction scores by 20 points.</li>
+        <li>Architected multi-agent chatbot system using AWS Bedrock (Claude/Nova models) with custom orchestration layer, achieving 60% autonomous resolution rate across 10+ customer workflows.</li>
+        <li>Built real-time debugging assistant integrated with internal ticketing systems, reducing mean time to resolution from 8 hours to 2 hours across 200+ daily incidents.</li>
+        <li>Designed and deployed 8 production microservices using Node.js and AWS Lambda, handling 300M+ monthly requests with p99 latency under 200ms and 99.95% uptime.</li>
+        <li>Led cross-functional team of 5 engineers through full SDLC, establishing CI/CD pipelines that increased deployment frequency from weekly to daily releases.</li>
+        <li>Mentored 15+ engineers on AI integration patterns through technical workshops, resulting in 4 additional AI-powered features shipped within 6 months.</li>
+      </ul>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-header">
+        <h3>Senior Software Developer &mdash; <span class="company">Best Buy</span></h3>
+        <div class="meta">Minneapolis &nbsp;|&nbsp; May 2018 &mdash; August 2019</div>
+      </div>
+      <ul>
+        <li>Architected microservices platform serving 2M+ daily requests across 5 core services, reducing P99 latency by 35% and achieving 99.9% uptime.</li>
+        <li>Built mobile service management platform (Angular) for real-time customer verification and service provider onboarding across 1,200+ Best Buy locations, processing 15K+ daily transactions.</li>
+        <li>Implemented Spring Cloud Config Server for centralized configuration management across 12 microservices, reducing deployment time by 50%.</li>
+        <li>Established circuit breaker patterns and service mesh architecture, preventing cascading failures during peak traffic events (Black Friday: 8x normal load).</li>
+      </ul>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-header">
+        <h3>Software Engineer &mdash; <span class="company">Thomson Reuters</span></h3>
+        <div class="meta">Minneapolis &nbsp;|&nbsp; October 2017 &mdash; May 2018</div>
+      </div>
+      <ul>
+        <li>Orchestrated enterprise-scale data migration of 10M+ training document records from legacy Oracle systems using Spring Batch, reducing processing time by 60%.</li>
+        <li>Developed Angular-based learning management platform supporting 5K+ internal users with course tracking, certification management, and compliance reporting.</li>
+        <li>Implemented OAuth 2.0 authentication layer across 6 microservices, securing API access for 50+ client applications.</li>
+      </ul>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-header">
+        <h3>Staff Consultant &mdash; <span class="company">Citi Corporation</span></h3>
+        <div class="meta">Fort Lauderdale &nbsp;|&nbsp; December 2016 &mdash; September 2017</div>
+      </div>
+      <ul>
+        <li>Architected configurable Angular framework enabling business users to generate custom web forms through JSON configuration, reducing time-to-market from 6 weeks to 3 days.</li>
+        <li>Implemented responsive design system supporting seamless experience across desktop, tablet, and mobile devices.</li>
+        <li>Established agile development practices, improving team velocity by 40% and reducing production bug escape rate from 18% to 4%.</li>
+      </ul>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-header">
+        <h3>Associate Consultant &mdash; <span class="company">Oracle Financial Services</span></h3>
+        <div class="meta">Bangalore &nbsp;|&nbsp; August 2012 &mdash; December 2016</div>
+      </div>
+      <ul>
+        <li>Architected and delivered enterprise risk assessment platform for consumer lending, processing credit evaluations for 80+ financial institutions and supporting $3B+ in annual transactions.</li>
+        <li>Led technical modernization initiative introducing Angular and RESTful services to legacy Java Struts application, reducing page load times by 65%.</li>
+        <li>Mentored team of 6 junior developers on Java EE patterns, Spring Framework, and Angular development, with 4 mentees promoted to senior roles within 18 months.</li>
+        <li>Delivered 15+ features across 8 quarterly releases with 95% on-time delivery rate.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="fade-in"><i data-lucide="graduation-cap" style="width:22px;height:22px;"></i> Education</h2>
+    <div class="edu fade-in">
+      <h3>Bachelor of Technology (B.Tech)</h3>
+      <div class="meta">Jawaharlal Nehru Technological University, Vijayawada &nbsp;|&nbsp; August 2008 &mdash; May 2012</div>
+      <p class="field">Computer Science and Engineering</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Chaitanya Varma Chekuri
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll-triggered fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+    // Active nav highlighting on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+
+    function updateActiveNav() {
+      const navHeight = document.querySelector('nav').offsetHeight;
+      const scrollPos = window.scrollY + navHeight + 20;
+      let currentId = '';
+
+      // If scrolled to the bottom, highlight the last section
+      if (window.innerHeight + Math.round(window.scrollY) >= document.body.scrollHeight - 2) {
+        currentId = sections[sections.length - 1].id;
+      } else {
+        sections.forEach((section) => {
+          if (section.offsetTop <= scrollPos) {
+            currentId = section.id;
+          }
+        });
+      }
+
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    // Expand/collapse for jobs with more than 2 bullets
+    document.querySelectorAll('.job').forEach((job) => {
+      const items = job.querySelectorAll('li');
+      if (items.length <= 2) return;
+
+      items.forEach((li, i) => { if (i >= 2) li.classList.add('hidden-bullet'); });
+
+      const btn = document.createElement('button');
+      btn.className = 'toggle-bullets';
+      btn.innerHTML = '<i data-lucide="chevron-down"></i> Show more (' + (items.length - 2) + ')';
+      btn.setAttribute('aria-expanded', 'false');
+
+      let expanded = false;
+      btn.addEventListener('click', () => {
+        expanded = !expanded;
+        items.forEach((li, i) => {
+          if (i >= 2) li.classList.toggle('hidden-bullet', !expanded);
+        });
+        btn.innerHTML = expanded
+          ? '<i data-lucide="chevron-up"></i> Show less'
+          : '<i data-lucide="chevron-down"></i> Show more (' + (items.length - 2) + ')';
+        btn.setAttribute('aria-expanded', String(expanded));
+        lucide.createIcons();
+      });
+
+      job.querySelector('ul').after(btn);
+    });
+
+    // Re-render icons for dynamically added buttons
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
