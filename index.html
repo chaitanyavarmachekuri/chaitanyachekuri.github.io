@@ -452,8 +452,8 @@
 
       const btn = document.createElement('button');
       btn.className = 'toggle-bullets';
-      btn.innerHTML = '<i data-lucide="chevron-down"></i> Show more (' + (items.length - 2) + ')';
-      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = '<i data-lucide="chevron-down"></i> Show Less';
+      btn.setAttribute('aria-expanded', 'true');
 
       let expanded = true;
       btn.addEventListener('click', () => {
